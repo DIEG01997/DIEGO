@@ -3,10 +3,10 @@ package PROGRAMAS;
 import java.util.Scanner;
 import java.io.*;
 
-public class FlujoDeLecturaDesdeFichero {
+public class FlujoDeLecturaDeCaracteresDesdeFichero {
 
 	/*
-	 * EJERCICIO 1: LECTURA DE FICHERO.
+	 * EJERCICIO 1: LECTURA DE CARÁCTERES DESDE UN FICHERO.
 	 * 
 	 * Un programa trabaja con información en dos sentidos: recibe información de 
 	 * entrada (inputs) y devuelve información procesada (outputs). Es útil pensar en 
@@ -61,31 +61,42 @@ public class FlujoDeLecturaDesdeFichero {
 	public static void main(String[] args) {
 
 		Scanner leer = new Scanner(System.in);
+
 		String rutaFicheroALeer;
+		//Variable que guardará el entero que devuelve el método .read() 
 		int enteroByte;
+		//Variable que guardará la conversión a tipo character de la variable 'enteroByte'
 		char letra;
 		
+		//Pedimos la ruta del fichero de caracteres que queremos leer:
 		System.out.println(" Introduce la ruta del fichero que quieras leer: ");
 		rutaFicheroALeer = leer.next();
-		
+		//Creamos el objeto que hace referencia a la ruta del fichero a leer:
 		File fichero = new File(rutaFicheroALeer);
 		
+		//Si existe el fichero se podrá leer
 		if(fichero.exists()) {
 			try {
-				
+			//Creamos el objeto 'flujo de lectura de caracteres desde fichero'
 			FileReader flujoLecturaDesdeFichero = new FileReader(fichero);
+			//Leemos desde el principio del fichero el primer carácter
 			enteroByte = flujoLecturaDesdeFichero.read();
+			//Convertimos el valor entero que devuelve el método .read() a char
 			letra = (char)enteroByte;
+			//Leemos los caracteres del fichero hasta que el método lectura devuelva
+			// el valor -1 (significa que no hay nada más que leer)
 			while(enteroByte != -1) {
 				System.out.print(letra);
 				enteroByte = flujoLecturaDesdeFichero.read();
 				letra = (char)enteroByte;
 			}
+			//Cerramos el canal de lectura desde fichero
 			flujoLecturaDesdeFichero.close();
 			} catch( Exception e) {
 				e.printStackTrace();
 			}
 		} else {
+			//Si no existe el fichero se informará al usuario
 			System.out.println(" El fichero no existe, por lo tanto no se puede leer.");
 		}
 		
