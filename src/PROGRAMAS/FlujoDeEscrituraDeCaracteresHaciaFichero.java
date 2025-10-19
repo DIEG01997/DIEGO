@@ -28,15 +28,14 @@ public class FlujoDeEscrituraDeCaracteresHaciaFichero {
 			
 		System.out.println(" Introduce un texto: ");
 		texto = leer.next();
-		flujoEscrituraHaciaFichero.write("\n");
-		
 		while(!texto.equals("salir")) {
 			flujoEscrituraHaciaFichero.write(texto);
-				System.out.println(" Introduce un texto: ");
-				texto = leer.next();
-			flujoEscrituraHaciaFichero.write("\n");
+			leer.nextLine();
+			System.out.println(" Introduce un texto: ");
+			texto = leer.next();
 
 		}
+		
 		flujoEscrituraHaciaFichero.close();
 		} catch (Exception e) {
 			e.printStackTrace();
