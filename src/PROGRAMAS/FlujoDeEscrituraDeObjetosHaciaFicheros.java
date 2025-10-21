@@ -6,15 +6,27 @@ import java.util.Scanner;
 
 public class FlujoDeEscrituraDeObjetosHaciaFicheros {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		
 		Scanner leer = new Scanner(System.in);
 		System.out.println("Introduce la ruta del fichero donde vas a escribir objetos:");
 		String ruta = leer.next();
 		
 		File fichero = new File(ruta);
-		FileOutputStream flujoSalida = new FileOutputStream(fichero,false);
-		ObjectOutputStream flujoObjetoSalida = new ObjectOutputStream(flujoSalida);
+		FileOutputStream flujoSalida = null;
+		try {
+			flujoSalida = new FileOutputStream(fichero,false);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ObjectOutputStream flujoObjetoSalida = null;
+		try {
+			flujoObjetoSalida = new ObjectOutputStream(flujoSalida);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		System.out.println("Introduce le nombre:");
 		String nombre = leer.next();
@@ -27,10 +39,25 @@ public class FlujoDeEscrituraDeObjetosHaciaFicheros {
 		
 		ClaseParaTrabajarConFlujosDeObjetos persona1 = new ClaseParaTrabajarConFlujosDeObjetos(nombre,edad,estado,sueldo);
 		
-		flujoObjetoSalida.writeObject(persona1);
+		try {
+			flujoObjetoSalida.writeObject(persona1);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		flujoObjetoSalida.close();
-		flujoSalida.close();
+		try {
+			flujoObjetoSalida.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			flujoSalida.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		leer.close();
 		System.out.println("Fin del programa.");
 	}
