@@ -14,9 +14,8 @@ public class FlujoDeLecturaDeDatosPrimitivosDesdeFichero {
 			String ruta = leer.next();
 			File fichero = new File(ruta);
 			
-			FileInputStream flujoEntrada;
 			try {
-				flujoEntrada = new FileInputStream(fichero);
+				FileInputStream flujoEntrada = new FileInputStream(fichero);
 				DataInputStream flujoDatosEntrada = new DataInputStream(flujoEntrada);
 				
 				while(true) {
